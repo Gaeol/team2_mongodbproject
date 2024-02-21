@@ -1,5 +1,5 @@
 const Input = require('../userInput');
-const Join = require('../Join/join');
+const Join = require('../join/join');
 const Login = require('../login/login');
 const NotCustomer = require('../notCustomer/notCustomer');
 
