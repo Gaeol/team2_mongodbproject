@@ -1,0 +1,27 @@
+const Input = require('../userInput'); 
+const UpCustomer = require('../upCustomer/upCustomer'); 
+
+async function myinfor(){
+  while(true){
+  console.log('1.수정 2.계정탈퇴 3.뒤로가기 4종료');
+  let select = await Input.getUserInput();
+  if (select === '1') {
+    //Menu.menu();
+    await UpCustomer.upCustomer();
+  }else if(select === '2'){
+    console.log('정말로 탈퇴하시겠습니까?');
+    console.log('1.예 2.아니오')
+    let select_2 = await Input.getUserInput();
+    if(select_2 === '1'){
+      //삭제함수
+    }else{
+      console.log('취소되었습니다')
+    }
+  }else if(select === '3'){
+    return;
+  }else if(select === '4'){
+    process.exit();
+  }
+  }
+}
+module.exports = {myinfor};
