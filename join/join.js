@@ -1,20 +1,11 @@
-// const mongoose = require('mongoose');
+
+
 // const readline = require('readline');
 
-// // MongoDB 연결
-// mongoose.connect('mongodb://localhost:27017/mongoCafe')
-//   .then(() => console.log('MongoDB connected'))
-//   .catch(err => console.error(err));
 
 
-// // Mongoose 모델 정의
-// const userSchema = new mongoose.Schema({
-//   username: String,
-//   password: String,
-//   email: String
-// });
 
-// const User = mongoose.model('User', userSchema);
+
 
 // // readline 인터페이스 설정
 // const rl = readline.createInterface({
