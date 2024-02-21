@@ -7,11 +7,11 @@ async function customers(){
   console.log('1.회원가입 2.로그인 3.비회원 4.뒤로가기 5.종료');
   let select = await Input.getUserInput();
     if (select === '1') {
-      Join.join();
+      await Join.join();
     }else if (select === '2'){
-      Login.login();
+      await Login.login();
     }else if (select === '3'){
-      NotCustomer.nonCostomer();
+      await NotCustomer.nonCostomer();
     }else if (select === '4'){
       return;
     }
