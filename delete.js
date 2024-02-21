@@ -8,7 +8,7 @@ async function main(){
 
   try {
     await client.connect();
-    await deldocs(client, "mongoCafe", "dataname");
+    await deldocs(client, "mongoCafe", "Menu");
   } finally {
     await client.close();
   }
