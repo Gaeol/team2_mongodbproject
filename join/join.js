@@ -1,27 +1,25 @@
-const { rl } = require('../readlineModule');
+const Input = require('../userInput');
 
-// 사용자 입력 받기
-rl.question('Username: ', function(username) {
-  rl.question('Password: ', function(phoneNumber) {
-    rl.question('Email: ', function(birthDate) {
-      // 새 사용자 생성 및 저장
-      const newUser = new User({ username, phoneNumber, birthDate });
-      newUser.save()
-        .then(user => {
-          console.log('가입이 완료되었습니다:', user);
-          mongoose.disconnect();
-          rl.close();
-        })
-        .catch(err => {
-          console.error('Error creating user:', err);
-          mongoose.disconnect();
-          rl.close();
-        });
-    });
-  });
-});
+async function registerUser(client) {
+  console.log('이름을 입력해주세요: ');
+  let username = await Input.getUserInput();
+  console.log('전화번호를 입력해주세요: ');
+  let phoneNumber = await Input.getUserInput();
+  console.log('생년월일 6자리를 입력해주세요: ');
+  let birthDate = await Input.getUserInput();
+}
+  // Mongo에 사용자 정보 삽입
+//   const newUser = new User({ username, phoneNumber, birthDate });
+//   newUser.save()
+//     .then(user => {
+//       console.log('가입이 완료되었습니다:', user);
+//       mongoose.disconnect();
+//     })
+//     .catch(err => {
+//       console.error('Error creating user:', err);
+//       mongoose.disconnect();
+//     });
+// }
 
-rl.on('close', function() {
-  console.log('\nExiting signup process');
-  process.exit(0);
-});
+
+module.exports = { registerUser };

@@ -5,5 +5,4 @@ async function menu(client, dbname, colname){
   console.table(result);
 };
 
-
 module.exports = {menu};

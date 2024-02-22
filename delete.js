@@ -1,27 +1,13 @@
-const {MongoClient} = require('mongodb');
-async function main(){
-  const uri = process.env.DB_LOCAL_URL;
-  // const uri = process.env.DB_ATLAS_URL;
-  // console.log(uri);
+const { getUserInput } = require('./userInput');
 
-  const client = new MongoClient(uri);
-
-  try {
-    await client.connect();
-    await deldocs(client, "mongoCafe", "Menu");
-  } finally {
-    await client.close();
-  }
+async function deleteAccount(client, mongoCafe, Customers){
+  console.log("삭제할 회원의 이름을 입력하세요")
+  const delName = await getUserInput()
+  let myqry = { "name": `${delName}` };
+  const result = await client.db(mongoCafe).collection(Customers).deleteOne(myqry);
+  console.log("계정이 삭제되었습니다");
 };
 
-main().catch(console.error);
+module.exports = {deleteAccount};
 
-async function deldocs(client, dbname, colname){
-  var myqry = { Name: "TV" };
-  const result = await client.db(dbname).collection(colname).deleteOne(myqry);
-  console.log("Document Deleted");
-
-  //  var myqry = {"price":{$gt:10000}};
-  //  const result = await client.db(dbname).collection(colname).deleteMany(myqry);
-  //  console.log("Documents Deleted");
-};
+// await deleteAccount(client, "mongoCafe", "Customers");
