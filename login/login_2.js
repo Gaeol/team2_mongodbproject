@@ -1,6 +1,6 @@
 const Input = require('../userInput'); 
 const Menu = require('../menu/menu'); 
-const Order = require('../order/order'); 
+const Order = require('../order/orders'); 
 const Myinfor= require('../myinfor/myinfor'); 
 
 async function login_2(client){
@@ -8,7 +8,7 @@ async function login_2(client){
   console.log('1.주문하기 2.내정보하기 3.뒤로가기 4종료');
   let select = await Input.getUserInput();
   if (select === '1') {
-    //Menu.menu();
+    await Order.displayMenu(client);
   }else if(select === '2'){
     //내정보보기함수
     await Myinfor.myinfor(client);
