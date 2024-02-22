@@ -17,7 +17,9 @@ main().catch(console.error);
 
 
 async function dropcol(client, dbname, colname){
+async function deleteDoc(client, dbname, colname){
   // const result = await client.db(dbname).collection(colname).drop();
   const result = await client.db(dbname).dropCollection(colname);
   console.log("Collection dropped");
+}
 }
