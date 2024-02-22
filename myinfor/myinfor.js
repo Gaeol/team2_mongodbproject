@@ -24,7 +24,7 @@ async function myinfor(client){
   }else if(select === '4'){
     process.exit();
   }else if(select === '5'){
-    await Insert.UserInsert(client, "mongoCafe", "Customers", {
+    await Insert.userInsert(client, "mongoCafe", "Customers", {
     "name":"송동현", "birhhdate":"1999-07-28", "phoneNumber":" 010-2003-2718", "totalPayment":1000, "membershipLevel" : "Bonze", "cardNumber": "1234-5679-1234-5678", "paymentPassword":7536 
     });
   }

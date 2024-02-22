@@ -5,3 +5,5 @@ async function userInsert(client, dbname, colname, doc){
   const result = await col.insertOne(doc);
   console.log(`New document created with the following id: ${result.insertedId}`);
 };
+
+module.exports = {userInsert};
