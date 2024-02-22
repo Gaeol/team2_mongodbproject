@@ -15,7 +15,7 @@ async function employees(client){
     }else if (select === '2'){
       await MenuCheck.menuCheck(client);
     }else if (select === '3'){
-      await StockCheck.stockCheck(client);
+      await StockCheck.stockCheck(client, "mongoCafe", "Menu");
     }else if (select === '4'){
       await CusManage.cusManage(client);
     }else if (select === '5'){
