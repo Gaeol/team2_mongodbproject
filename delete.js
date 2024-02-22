@@ -1,14 +1,13 @@
-  try {
-    await client.connect();
-    await deldocs(client, "mongoCafe", "Menu");
-  } finally {
-    await client.close();
-  }
+const { getUserInput } = require('./userInput');
 
-async function deletes(client, dbname, colname){
-  var myqry = { Name: "TV" };
-  const result = await client.db(dbname).collection(colname).deleteOne(myqry);
-  console.log("삭제되었습니다.");
+async function deleteAccount(client, mongoCafe, Customers){
+  console.log("삭제할 회원의 이름을 입력하세요")
+  const delName = await getUserInput()
+  let myqry = { "name": `${delName}` };
+  const result = await client.db(mongoCafe).collection(Customers).deleteOne(myqry);
+  console.log("계정이 삭제되었습니다");
 };
 
-module.imports = {deletes};
+module.exports = {deleteAccount};
+
+// await deleteAccount(client, "mongoCafe", "Customers");

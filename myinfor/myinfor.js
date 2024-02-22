@@ -1,6 +1,7 @@
 const Input = require('../userInput'); 
 const UpCustomer = require('../upCustomer/upCustomer'); 
 const Insert = require('../insert'); 
+const DeleteAccount = require('../delete')
 
 
 async function myinfor(client){
@@ -15,7 +16,7 @@ async function myinfor(client){
     console.log('1.예 2.아니오')
     let select_2 = await Input.getUserInput();
     if(select_2 === '1'){
-      //삭제함수
+      await DeleteAccount.deleteAccount(client, "mongoCafe", "Customers")
     }else{
       console.log('취소되었습니다')
     }
