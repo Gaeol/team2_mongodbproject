@@ -3,7 +3,7 @@ const Menu = require('../menu/menu');
 const orders = require('../orders');
 
 async function nonCostomer(client){
-  console.log('1.주문하기 3.뒤로가기 4.종료');
+  console.log('1.주문하기 2.뒤로가기 3.종료');
   while(true){
     try{
       let select = await Input.getUserInput();
