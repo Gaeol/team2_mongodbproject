@@ -1,10 +1,6 @@
   try {
     await client.connect();
-<<<<<<< HEAD
-    await deletes(client, "mongoCafe", "Customers");
-=======
     await deldocs(client, "mongoCafe", "Menu");
->>>>>>> f966cc287618ac7c43d6c59ddee3b1832d7f88a8
   } finally {
     await client.close();
   }
