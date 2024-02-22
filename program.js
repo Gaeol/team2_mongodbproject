@@ -4,7 +4,6 @@ const Employees= require('./employees/employees.js')
 const Customers= require('./customers/customers.js')
 const Menu= require('./menu/menu.js')
 
-
 const EventEmitter = require('events');
 const { resolve } = require('path');
 // 이벤트를 처리하는 EventEmitter 객체 생성
