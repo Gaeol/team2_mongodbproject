@@ -2,6 +2,7 @@ const Input = require('../userInput');
 const Joining = require('../join/join.js');
 const Login = require('../login/login');
 const NotCustomer = require('../notCustomer/notCustomer');
+const orders = require('../orders')
 
 async function customers(client){
   while(true){
