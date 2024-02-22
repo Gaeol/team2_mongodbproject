@@ -19,8 +19,9 @@ async function login(client){
       //   exam_id=exam_id(id);
       // }
       console.log(`로그인되었습니다. ${id}님 안녕하세요`)
-    }
       await Login_2.login_2(client);
+    }
+      
 
     }else if(select === '2'){
       return true;

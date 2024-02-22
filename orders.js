@@ -1,17 +1,17 @@
-const { MongoClient } = require('mongodb');
-const { rl } = require('./readlineModule');
+const {rl} = require('./userInput');  
+// const { MongoClient } = require('mongodb');
 
 // MongoDB 연결 URI 설정
-const uri = process.env.DB_ATLAS_URL;
+// const uri = process.env.DB_ATLAS_URL;
 
 // 적절한 에러 핸들링을 위해 try-catch 블록 추가
-try {
-  const client = new MongoClient(uri);
+// try {
+  // const client = new MongoClient(uri);
 
-  async function displayMenu() {
+  async function displayMenu(client) {
     try {
       // MongoDB에 연결
-      await client.connect();
+      // await client.connect();
       console.log('');
       console.log('mongoCafe에 오신 것을 환영합니다.');
       const database = client.db('mongoCafe'); // 데이터베이스 이름
@@ -57,7 +57,7 @@ try {
   1.예 2.아니요 
 >  `, async (addOrder) => {
               if (addOrder === '1') {
-                displayMenu();
+                displayMenu(client);
               }else if (addOrder === '2'){
                 console.log('~~~~~~~~~~~~~~~~~~~~~')
                 console.log('mongoCafe~를 이용해 주셔서 감사합니다.');
@@ -93,13 +93,14 @@ console.log('~~~~~~~~~~~~~~~~~~~~~');
 }
 
 // Ensure readline interface is closed on exit
-rl.on('close', () => {
-process.exit(0);
-});
+// rl.on('close', () => {
+// process.exit(0);
+// });
 
-// Start the menu display process
-displayMenu();
-} catch (error) {
-console.error('MongoDB 연결 실패:', error);
-rl.close();
-}
+// // Start the menu display process
+// displayMenu();
+// } catch (error) {
+// console.error('MongoDB 연결 실패:', error);
+// rl.close();
+// }
+module.exports = {displayMenu};
