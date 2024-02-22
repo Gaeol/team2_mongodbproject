@@ -8,7 +8,7 @@ async function customers(client){
   console.log('1.회원가입 2.로그인 3.비회원 4.뒤로가기 5.종료');
   let select = await Input.getUserInput();
     if (select === '1') {
-      await Joining.registerUser();
+      await Joining.registerUser(client);
     }else if (select === '2'){
       await Login.login(client);
     }else if (select === '3'){
