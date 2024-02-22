@@ -21,7 +21,7 @@ async function main(){
     if (select === '1') {
       await Employees.employees();
     }else if (select === '2'){
-      await Customers.customers();
+      await Customers.customers(client);
     }else if (select === '3'){
       await Menu.menu(client, "mongoCafe", "Menu");
     }else if (select === '4'){
