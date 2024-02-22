@@ -1,10 +1,10 @@
 const Input = require('../userInput'); 
 
-async function menu(){
-  await sortdocs(client, "mydb", "products");
-}
 
-async function sortdocs(client, dbname, colname){}
 
+async function menu(client, dbname, colname){
+  const result = await client.db(dbname).collection(colname).find({}).toArray();
+  console.table(result);
+};
 
 module.exports = {menu};
