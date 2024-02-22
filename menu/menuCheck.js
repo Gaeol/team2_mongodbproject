@@ -1,6 +1,7 @@
 const Input = require('../userInput'); 
 const Menu= require('../menu/menu.js');
 const Insert= require('../insert.js');
+const DeleteMenu = require('../delete')
 
 async function menuCheck(client){
   while(true){
@@ -22,7 +23,8 @@ async function menuCheck(client){
         await Insert.userInsert(client, "mongoCafe", "Menu", {
           "_id":parseInt(id), "category":`${category}`, "name":`${name}`, "comment":`${comment}`,"price":parseInt(price)});
       }else if (select === '2'){
-        //메뉴삭제 함수
+        console.log('메뉴 삭제를 선택하셨습니다.')
+        await DeleteMenu.deleteMenu(client, "mongoCafe", "Menu")
       }else if (select === '3'){
         return true;
       }else if (select === '4'){
