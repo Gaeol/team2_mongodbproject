@@ -1,17 +1,4 @@
-
-
-// const readline = require('readline');
-
-
-
-
-
-
-// // readline 인터페이스 설정
-// const rl = readline.createInterface({
-//   input: process.stdin,
-//   output: process.stdout
-// });
+// const { rl } = require('../readlineModule');
 
 // // 사용자 입력 받기
 // rl.question('Username: ', function(username) {
@@ -38,5 +25,3 @@
 //   console.log('\nExiting signup process');
 //   process.exit(0);
 // });
-
-8
