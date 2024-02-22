@@ -1,6 +1,7 @@
 const Input = require('../userInput'); 
+const Updatedocuments = require('../update')
 
-async function upCustomer(){
+async function upCustomer(client){
   while(true){
   console.log('1.회원아이디 2.이름 3.생년월일 4.전화번호 5.카드번호, 6.결제비밀번호 7.뒤로가기 8.종료');
   let select = await Input.getUserInput();
@@ -15,8 +16,11 @@ async function upCustomer(){
     console.log('변경할 생년월일을 입력하세요')
     let birth= await Input.getUserInput();
   }else if(select === '4'){
-    console.log('변경할 전화번호을 입력하세요')
-    let phone= await Input.getUserInput();
+    // console.log('변경할 전화번호을 입력하세요')
+    // let phone= await Input.getUserInput();
+    await Updatedocuments.updateDocuments(client, "mongoCafe", "Customers");
+
+  
   }else if(select === '5'){
     console.log('변경할 카드번호을 입력하세요')
     let card= await Input.getUserInput();

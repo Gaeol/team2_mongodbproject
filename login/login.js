@@ -7,7 +7,6 @@ async function login(client){
   console.log('1.전화번호입력 2.뒤로가기 3.종료');
   while(true){
     let select = await Input.getUserInput();
-    let login_id
     if (select === '1') {
       while(true){
       console.log('전화번호를 입력해주세요');
@@ -18,11 +17,9 @@ async function login(client){
       //   id = await Input.getUserInput();
       //   exam_id=exam_id(id);
       // }
-      console.log(`로그인되었습니다. ${id}님 안녕하세요`)
+      console.log(`로그인되었습니다. ${login_id}님 안녕하세요`)
       await Login_2.login_2(client);
-    }
-      
-
+      }
     }else if(select === '2'){
       return true;
     }else if(select === '3'){
