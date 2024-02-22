@@ -1,6 +1,8 @@
 const Input = require('../userInput'); 
 const UpCustomer = require('../upCustomer/upCustomer'); 
 const Insert = require('../insert'); 
+const DeleteAccount = require('../delete')
+const Updatedocuments = require('../update')
 
 
 async function myinfor(client){
@@ -8,14 +10,13 @@ async function myinfor(client){
   console.log('1.수정 2.계정탈퇴 3.뒤로가기 4.종료 5.계정삽입연습');
   let select = await Input.getUserInput();
   if (select === '1') {
-    //Menu.menu();
-    await UpCustomer.upCustomer();
+    await UpCustomer.upCustomer(client);
   }else if(select === '2'){
     console.log('정말로 탈퇴하시겠습니까?');
     console.log('1.예 2.아니오')
     let select_2 = await Input.getUserInput();
     if(select_2 === '1'){
-      //삭제함수
+      await DeleteAccount.deleteAccount(client, "mongoCafe", "Customers")
     }else{
       console.log('취소되었습니다')
     }
