@@ -107,4 +107,5 @@ async function registerUser() {
     });
 }
 
-registerUser();
+
+module.exports = { registerUser };

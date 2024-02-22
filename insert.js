@@ -5,10 +5,11 @@ async function main(){
   // const uri = process.env.DB_ATLAS_URL;
   // console.log(uri);
   const client = new MongoClient(uri);
+  
 
   try {
       await client.connect();
-      await createdoc(client, "mongoCafe", "menu", {
+      await createdoc(client, "mongoCafe", "Menu", {
         // "ProductID":1, "Name":"Laptop", "Price":25000
       });
     
