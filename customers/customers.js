@@ -1,17 +1,18 @@
 const Input = require('../userInput');
-const Join = require('../join/join');
+const Joining = require('../join/join.js');
 const Login = require('../login/login');
 const NotCustomer = require('../notCustomer/notCustomer');
 
-async function customers(){
+async function customers(client){
+  while(true){
   console.log('1.회원가입 2.로그인 3.비회원 4.뒤로가기 5.종료');
   let select = await Input.getUserInput();
     if (select === '1') {
-      await Join.join();
+      await Joining.registerUser();
     }else if (select === '2'){
-      await Login.login();
+      await Login.login(client);
     }else if (select === '3'){
-      await NotCustomer.nonCostomer();
+      await NotCustomer.nonCostomer(client);
     }else if (select === '4'){
       return;
     }
@@ -19,4 +20,5 @@ async function customers(){
       process.exit();
     }
   }
+}
 module.exports = {customers};
