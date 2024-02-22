@@ -1,7 +1,7 @@
 const Input = require('../userInput'); 
 
 async function salesCheck(){
-
+  
 }
 
 
