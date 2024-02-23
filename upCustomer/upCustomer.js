@@ -15,8 +15,6 @@ async function upCustomer(client,user){
     console.log('변경할 생년월일을 입력하세요')
     let birth= await Input.getUserInput();
   }else if(select === '4'){
-    // console.log('변경할 전화번호을 입력하세요')
-    // let phone= await Input.getUserInput();
     await Updatedocuments.updateDocuments(client, "mongoCafe", "Customers");
 
   
