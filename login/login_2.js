@@ -10,7 +10,7 @@ async function login_2(client,user){
     try{
       let select = await Input.getUserInput();
       if (select === '1') {
-        await orders.displayMenu(client);
+        await orders.displayMenu(client,user);
       }else if(select === '2'){
         //내정보보기함수
         await Myinfor.myinfor(client,user);
