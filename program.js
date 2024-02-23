@@ -27,7 +27,6 @@ async function main(){
   console.log('1.관리자 2.고객 3. 메뉴 4. 종료');
   let select = await Input.getUserInput();
     if (select === '1') {
-      await Updatetotal.updateTotal(client);
       await Employees.employees(client);
     }else if (select === '2'){
       await Customers.customers(client);
