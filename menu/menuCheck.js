@@ -28,6 +28,7 @@ async function menuCheck(client){
       }else if (select === '3'){
         return true;
       }else if (select === '4'){
+        console.log('mongoCafe~를 이용해주셔서 감사합니다^^')
         process.exit();
       }
   }
