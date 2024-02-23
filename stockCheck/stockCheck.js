@@ -25,7 +25,7 @@ async function view(client, mongoCafe, Menu){
 
 async function edit(client, mongoCafe, Menu) {
   try {
-    console.log('수정할 메뉴의 이름을 입력하세요:');
+    console.log('수정할 메뉴를 입력하세요:');
     const menuName = await Input.getUserInput(client, mongoCafe, Menu);
 
     // 현재 재고 확인

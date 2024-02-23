@@ -1,9 +1,9 @@
 const {MongoClient}= require('mongodb');
 const Input = require('./userInput');
-const Employees= require('./employees/employees.js')
-const Customers= require('./customers/customers.js')
-const Menu= require('./menu/menu.js')
-const Updatetotal= require('./updatetotal.js')
+const Employees= require('./employees/employees.js');
+const Customers= require('./customers/customers.js');
+const Menu= require('./menu/menu.js');
+const Updatetotal= require('./updatetotal.js');
 
 
 const EventEmitter = require('events');
