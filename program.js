@@ -3,6 +3,8 @@ const Input = require('./userInput');
 const Employees= require('./employees/employees.js')
 const Customers= require('./customers/customers.js')
 const Menu= require('./menu/menu.js')
+const Updatetotal= require('./updatetotal.js')
+
 
 const EventEmitter = require('events');
 const { resolve } = require('path');
@@ -25,6 +27,7 @@ async function main(){
   console.log('1.관리자 2.고객 3. 메뉴 4. 종료');
   let select = await Input.getUserInput();
     if (select === '1') {
+      await Updatetotal.updateTotal(client);
       await Employees.employees(client);
     }else if (select === '2'){
       await Customers.customers(client);

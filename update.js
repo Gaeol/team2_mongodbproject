@@ -33,9 +33,9 @@ const { getUserInput } = require('./userInput');
 
 // fieldToUpdate는 업데이트할 필드의 이름, 예를 들어 "phoneNumber" 또는 "name" 등
 // newValue는 해당 필드에 설정할 새로운 값
-async function updatedocuments(client, mongoCafe, Customers, fieldToUpdate, oldValue, newValue ,user) {
+async function updatedocuments(client, mongoCafe, Customers, fieldToUpdate,  newValue ,user) {
   console.log(`수정완료되었습니다`);
-  let myquery = { [fieldToUpdate]: oldValue };
+  let myquery = { [fieldToUpdate]: `${user}` };
 
   const result = await client.db(mongoCafe).collection(Customers).updateOne(
     myquery,
