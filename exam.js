@@ -8,12 +8,12 @@ async function exam(client, dbname, colname, login_id,login_pwd){
 
   while(ex===1){
     for(let i=0; i<result[0]['customerNumber']; i++){
-      if(login_id ===result[i]['customer_id'] && parseInt(login_pwd) ===result[i]['paymentPassword'] ){
+      if(login_id ===result[i]['customer_id'] && login_pwd ===result[i]['paymentPassword'] ){
       ex=2;
-      customer=result[i]['customer_id'];
       console.log(`${customer}님이 로그인하셨습니다.`)
       break;
       }else{
+        console.log(customer=result[i]['customer_id']);
       }
     }
     if(ex===1){
