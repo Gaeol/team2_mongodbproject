@@ -16,7 +16,7 @@ async function login(client){
       console.log(user);
       await Login_2.login_2(client, user);
     }else if(select === '2'){
-      return true;
+      await customers();
     }else if(select === '3'){
       console.log('mongoCafe~를 이용해주셔서 감사합니다^^')
       process.exit();
