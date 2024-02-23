@@ -15,7 +15,7 @@ async function login(client){
       const user  = await Exam.exam(client, "mongoCafe", "Customers", login_id, login_pwd)
       await Login_2.login_2(client, user);
     }else if(select === '2'){
-      await customers();
+      return true;
     }else if(select === '3'){
       console.log('mongoCafe~를 이용해주셔서 감사합니다^^')
       process.exit();
