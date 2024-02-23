@@ -22,7 +22,7 @@ async function registerUser(client) {
   const cusNum= result[0]['customerNumber']+1;
 
   await Insert.userInsert(client, "mongoCafe", "Customers", {
-    "customer_id":parseInt(userid), "birthDate":`${birthDate}`, "name":`${username}`, "cardNumber":`${cardNumber}`,"paymentPassword":`${pwd}`,"totalPayment":parseInt(0),"membershipLevel": "Bronze","phoneNumber":`${phoneNumber}`,"customerNumber":parseInt(cusNum) });
+    "customer_id":`${userid}`, "birthDate":`${birthDate}`, "name":`${username}`, "cardNumber":`${cardNumber}`,"paymentPassword":`${pwd}`,"totalPayment":parseInt(0),"membershipLevel": "Bronze","phoneNumber":`${phoneNumber}`,"customerNumber": parseInt(cusNum) });
   console.log('가입이 완료되었습니다');
 }
 
