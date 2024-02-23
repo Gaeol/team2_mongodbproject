@@ -4,7 +4,7 @@ const Exam =require('../exam');
 
 async function login(client){    
   console.log('로그인페이지입니다.');
-  console.log('1.아이디비번입력 2.뒤로가기 3.종료');
+  console.log('1.아이디입력 2.뒤로가기 3.종료');
   while(true){
     let select = await Input.getUserInput();
     if (select === '1') {
@@ -14,6 +14,7 @@ async function login(client){
       let login_pwd = await Input.getUserInput();
       const user=await Exam.exam(client, "mongoCafe", "Customers", login_id, login_pwd)
       console.log(user);
+      
       await Login_2.login_2(client, user);
     }else if(select === '2'){
       return true;
