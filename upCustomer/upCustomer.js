@@ -1,14 +1,13 @@
 const Input = require('../userInput'); 
 const Updatedocuments = require('../update')
 
-async function upCustomer(client){
+async function upCustomer(client,user){
   while(true){
   console.log('1.회원아이디 2.이름 3.생년월일 4.전화번호 5.카드번호, 6.결제비밀번호 7.뒤로가기 8.종료');
   let select = await Input.getUserInput();
   if (select === '1') {
     console.log('변경할 아이디를 입력하세요')
     let id= await Input.getUserInput();
-    //수정함수
   }else if(select === '2'){
     console.log('변경할 이름을 입력하세요')
     let name= await Input.getUserInput();
