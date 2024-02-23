@@ -1,8 +1,8 @@
 const Input = require('../userInput'); 
 
 async function salesCheck(client, dbname, colname){
-  const result = await client.db(dbname).collection(colname).find({}).sort({_id :1}).toArray();
-  const resultMenu = await client.db(dbname).collection("Menu").find({}).sort({_id :1}).toArray()
+  const result = await client.db(dbname).collection(colname).find({}).sort({_id :-1}).toArray();
+  const resultMenu = await client.db(dbname).collection("Menu").find({}).sort({_id :-1}).toArray()
   const result2 = await client.db(dbname).collection(colname).aggregate([
     {
       $project: { 
