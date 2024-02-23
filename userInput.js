@@ -6,17 +6,30 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
+// function getUserInput() {
+//     return new Promise((resolve, reject) => {
+//       // 첫번째 인자 : "close","line" 등
+//         rl.on('line', (line) => {
+//         resolve(line);
+//         })
+//         // .on('close',()=>{
+//         //     process.exit();
+//         // });
+//     });
+// }
+// // module.exports를 이용하여 함수를 외부로 보낸다.
+// // 다른 파일에서 require()를 이용하여 호출해서 사용
+
+
 function getUserInput() {
     return new Promise((resolve, reject) => {
-      // 첫번째 인자 : "close","line" 등
-        rl.on('line', (line) => {
-        resolve(line);
-        })
-        // .on('close',()=>{
-        //     process.exit();
-        // });
+        const tempListener = (line) => {
+            rl.off('line', tempListener); // 입력 받은 후 리스너 제거
+            resolve(line);
+        };
+        rl.on('line', tempListener);
     });
 }
-// module.exports를 이용하여 함수를 외부로 보낸다.
-// 다른 파일에서 require()를 이용하여 호출해서 사용
+
+
 module.exports = {getUserInput, rl};
