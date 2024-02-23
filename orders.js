@@ -1,7 +1,8 @@
 const {rl} = require('./userInput');  
 const Insert= require('./insert.js');
+const UpdateTotal= require('./updatetotal.js');
 
-  async function displayMenu(client,user,a) {
+  async function displayMenu(client,user) {
     try {
       console.log('');
       console.log('mongoCafe에 오신 것을 환영합니다.');
@@ -45,8 +46,8 @@ const Insert= require('./insert.js');
 
             if (quantity > 0) {
               // 주문 처리 함수 호출
-              placeOrder(selectedMenu, quantity, user,a);
-              addOrder(client, selectedMenu, quantity,user,a);
+              placeOrder(selectedMenu, quantity, user);
+              addOrder(client, selectedMenu, quantity,user);
               // payMent(client)
             } else {
               console.log('주문 수량은 1개 이상이어야 합니다.');
@@ -62,9 +63,8 @@ const Insert= require('./insert.js');
 let totalQuantity = 0;
 let orderedItems = [];
 let totalAmount = 0;
-let a=1;
 // 주문 처리 함수
-function placeOrder(selectedMenu, quantity,user,a) {
+function placeOrder(selectedMenu, quantity,user) {
   console.table([selectedMenu]);
   const totalPrice = selectedMenu.price * quantity;
   console.log('~~~~~~~~~~~~~~~~~~~~~');
@@ -83,7 +83,7 @@ function placeOrder(selectedMenu, quantity,user,a) {
   console.log('~~~~~~~~~~~~~~~~~~~~~');
 }
 
-function payMent(client,user,a){
+function payMent(client,user){
   console.log(`총 ${totalAmount}원입니다.`);
   console.log('~~~~~~~~~~~~~~~~~~~~~');
   rl.question(`어떤 걸로 결제 도와드릴까요?
@@ -98,19 +98,17 @@ function payMent(client,user,a){
         console.log('~~~~~~~~~~~~~~~~~~~~~');
         const orderId = await client.db("mongoCafe").collection("Orders").find({}).sort({_id :-1}).toArray();
         let newOrderId=orderId[0]['_id']+1;
-        
-        if(a===1){
+        if(orderedItems.length===1){
           await Insert.userInsert(client, "mongoCafe", "Orders", {
             "_id":parseInt(newOrderId), 
             "items":[
-            { "name": `${orderedItems[0]['name']}`, "quantity": parseInt(orderedItems[0]['quantity'])  },
-            { "name": `${orderedItems[1]['name']}`, "quantity": parseInt(orderedItems[1]['quantity'])  }
+            { "name": `${orderedItems[0]['name']}`, "quantity": parseInt(orderedItems[0]['quantity'])  }
             ],"count":parseInt(totalQuantity), 
             "total":parseInt(totalAmount),
             "lastOrderDate": new Date(),
             "customer_id": `${user}` 
           });
-        }else if(a===2){
+        }else if(orderedItems.length===2){
         await Insert.userInsert(client, "mongoCafe", "Orders", {
           "_id":parseInt(newOrderId), 
           "items":[
@@ -121,7 +119,7 @@ function payMent(client,user,a){
           "lastOrderDate": new Date(),
           "customer_id": `${user}` 
         });
-        }else if(a===3){
+        }else if(orderedItems.length===3){
           await Insert.userInsert(client, "mongoCafe", "Orders", {
             "_id":parseInt(newOrderId), 
             "items":[
@@ -133,7 +131,7 @@ function payMent(client,user,a){
             "lastOrderDate": new Date(),
             "customer_id": `${user}` 
           });
-        }else if(a===4){
+        }else if(orderedItems.length===4){
           await Insert.userInsert(client, "mongoCafe", "Orders", {
             "_id":parseInt(newOrderId), 
             "items":[
@@ -146,7 +144,7 @@ function payMent(client,user,a){
             "lastOrderDate": new Date(),
             "customer_id": `${user}` 
           });
-        }else if(a===5){
+        }else if(orderedItems.length===5){
           await Insert.userInsert(client, "mongoCafe", "Orders", {
             "_id":parseInt(newOrderId), 
             "items":[
@@ -161,7 +159,7 @@ function payMent(client,user,a){
             "customer_id": `${user}` 
           });
         }
-    
+        await UpdateTotal.updateTotal(client)
         process.exit(); 
       } else if (payMent === '2') {
         console.log('');
@@ -178,38 +176,36 @@ function payMent(client,user,a){
         console.log('~~~~~~~~~~~~~~~~~~~~~');
         process.exit(); 
       } else if(payMent === '4'){
-        displayMenu(client,user,a);
+        displayMenu(client,user);
       } else {
         console.log('잘못된 입력입니다. 다시 시도해주세요.');
-        displayMenu(client,user,a);
+        displayMenu(client,user);
       }
     });
   };
-function addOrder(client, selectedMenu, prevQuantity, user,a) {
+function addOrder(client, selectedMenu, prevQuantity, user) {
   rl.question(`추가 주문하시겠습니까? 
   1.예 2.아니요 
 >  `, async (addOrderChoice) => {
     if (addOrderChoice === '1') {
-      a=a+1;
-      console.log(a);
-      displayMenu(client,user,a);
+      displayMenu(client,user);
     } else if (addOrderChoice === '2') {
       rl.question(`더 이상 주문하지 않겠습니까? 
   1.예 2.아니요 
 > `, (exitChoice) => {
         if (exitChoice === '1') {
-          payMent(client,user, a);
+          payMent(client,user);
         } else if (exitChoice === '2') {
           // Continue taking orders
-          displayMenu(client,user,a);
+          displayMenu(client,user);
         } else {
           console.log('잘못된 입력입니다. 다시 시도해주세요.');
-          addOrder(client,selectedMenu, prevQuantity,user,a);
+          addOrder(client,selectedMenu, prevQuantity,user);
         }
       });
     } else {
       console.log('잘못된 입력입니다. 다시 시도해주세요.');
-      addOrder(client,selectedMenu, prevQuantity,user, a); // ask again
+      addOrder(client,selectedMenu, prevQuantity,user); // ask again
     }
   });
 }
