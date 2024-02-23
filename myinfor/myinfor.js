@@ -16,7 +16,7 @@ async function myinfor(client,user){
   console.table(myInfo)
   
   while(true){
-  console.log('1.수정 2.계정탈퇴 3.뒤로가기 4.종료 5.계정삽입연습');
+  console.log('1.수정 2.계정탈퇴 3.뒤로가기 4.종료');
   let select = await Input.getUserInput();
   if (select === '1') {
     await UpCustomer.upCustomer(client,user);
@@ -30,13 +30,9 @@ async function myinfor(client,user){
       console.log('취소되었습니다')
     }
   }else if(select === '3'){
-    return;
+    return true;
   }else if(select === '4'){
     process.exit();
-  }else if(select === '5'){
-    await Insert.userInsert(client, "mongoCafe", "Customers", {
-    "name":"송동현", "birhhdate":"1999-07-28", "phoneNumber":" 010-2003-2718", "totalPayment":1000, "membershipLevel" : "Bonze", "cardNumber": "1234-5679-1234-5678", "paymentPassword":7536 
-    });
   }
   }
 }

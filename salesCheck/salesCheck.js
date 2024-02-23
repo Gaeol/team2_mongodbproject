@@ -19,8 +19,8 @@ async function salesCheck(client, dbname, colname){
 
 //주문수 for문 안에 상세주문 for문
 
-for(let a=0; a<resultMenu[0]['_id']; a++){
-  for(let i=0; i<result[0]['_id']; i++){
+for(let a=0; a<resultMenu.length; a++){
+  for(let i=0; i<result.length; i++){
     for(let j=0; j<result2[0]['itemsCount']; j++){
       if(result[i]['items'][j]['name']===resultMenu[a]['name']){
         Total+= resultMenu[a]['price']*result[i]['items'][j]['quantity'];
