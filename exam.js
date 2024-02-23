@@ -4,16 +4,12 @@ async function exam(client, dbname, colname, login_id,login_pwd){
   const result = await client.db(dbname).collection(colname).find({}).sort({_id :-1}).toArray();
 
   let ex=1;
-  let customer;
-
   while(ex===1){
-    for(let i=0; i<result[0]['customerNumber']; i++){
-      if(login_id ===result[i]['customer_id'] && login_pwd ===result[i]['paymentPassword'] ){
+    for(let i=0; i<result.length; i++){
+      if(login_id === result[i]['customer_id'] && login_pwd === result[i]['paymentPassword'] ){
       ex=2;
       console.log(`${login_id}님이 로그인하셨습니다.`)
       break;
-      }else{
-        // console.log(customer=result[i]['customer_id']);
       }
     }
     if(ex===1){
