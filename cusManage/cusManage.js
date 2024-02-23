@@ -5,5 +5,4 @@ async function cusManage(client, dbname, colname){
   console.log(`오늘의 몽고커피 총 방문손님 수는 ${result[0]['_id']} 명입니다`)
 }
 
-
 module.exports = {cusManage};

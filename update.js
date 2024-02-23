@@ -24,4 +24,4 @@ async function updateDocuments(client, mongoCafe, Customers) {
   }
 };
 
-module.exports = { updateDocuments };
+module.exports = {updateDocuments};
