@@ -30,15 +30,11 @@ async function myinfor(client,user){
       console.log('취소되었습니다')
     }
   }else if(select === '3'){
-    return;
+    return true;
   }else if(select === '4'){
     console.log('mongoCafe~를 이용해주셔서 감사합니다^^')
     process.exit();
-  }else if(select === '5'){
-    await Insert.userInsert(client, "mongoCafe", "Customers", {
-    "name":"송동현", "birhhdate":"1999-07-28", "phoneNumber":" 010-2003-2718", "totalPayment":1000, "membershipLevel" : "Bonze", "cardNumber": "1234-5679-1234-5678", "paymentPassword":7536 
-    });
   }
-  }
-}
+  };
+};
 module.exports = {myinfor};
