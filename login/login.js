@@ -13,7 +13,6 @@ async function login(client){
       console.log('비밀번호를 입력해주세요');
       let login_pwd = await Input.getUserInput();
       const user=await Exam.exam(client, "mongoCafe", "Customers", login_id, login_pwd)
-      console.log(user);
       await Login_2.login_2(client, user);
     }else if(select === '2'){
       return true;
