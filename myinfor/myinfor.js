@@ -16,7 +16,7 @@ async function myinfor(client,user){
   console.table(myInfo)
   
   while(true){
-  console.log('1.수정 2.계정탈퇴 3.뒤로가기 4.종료 5.계정삽입연습');
+  console.log('1.수정 2.계정탈퇴 3.뒤로가기 4.종료');
   let select = await Input.getUserInput();
   if (select === '1') {
     await UpCustomer.upCustomer(client,user);
@@ -32,6 +32,7 @@ async function myinfor(client,user){
   }else if(select === '3'){
     return;
   }else if(select === '4'){
+    console.log('mongoCafe~를 이용해주셔서 감사합니다^^')
     process.exit();
   }else if(select === '5'){
     await Insert.userInsert(client, "mongoCafe", "Customers", {

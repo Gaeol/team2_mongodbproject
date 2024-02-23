@@ -13,6 +13,7 @@ async function stockCheck(client, mongoCafe, Menu){
   }else if(select === '3'){
     return;
   }else if(select === '4'){
+    console.log('mongoCafe~를 이용해주셔서 감사합니다^^')
     process.exit();
   }
 }

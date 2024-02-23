@@ -17,6 +17,7 @@ async function login_2(client,user){
       }else if(select === '3'){
         return true;
       }else if(select === '4'){
+        console.log('mongoCafe~를 이용해주셔서 감사합니다^^')
         process.exit();
       }
     } catch (error) {
