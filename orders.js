@@ -85,6 +85,7 @@ function placeOrder(selectedMenu, quantity,user,a) {
 
 function payMent(client,user,a){
   console.log(`총 ${totalAmount}원입니다.`);
+  console.log('~~~~~~~~~~~~~~~~~~~~~');
   rl.question(`어떤 걸로 결제 도와드릴까요?
 1.카드 2.포인트 3.취소 4.뒤로가기
 > `, async (payMent) => {

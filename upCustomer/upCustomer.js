@@ -23,6 +23,7 @@ async function upCustomer(client,user){
 
   }else if(select === '2'){
 
+
   console.log(`${user}님, 이름을 입력해주세요:`);
     let oldName = await Input.getUserInput();
     console.log('새로운 이름을 입력해주세요 :');

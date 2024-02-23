@@ -4,8 +4,17 @@ const Insert = require('../insert');
 const DeleteAccount = require('../delete')
 const Updatedocuments = require('../update')
 
-
 async function myinfor(client,user){
+  //userinfo 가져오기
+  console.log('My Profile');
+  const database = client.db('mongoCafe'); // 데이터베이스 이름
+  const collection = database.collection('Customers'); // 컬렉션 이름
+  // const myInfo = await collection.find({"customer_id" : `${user}`}).toArray();
+  
+  const projection = { _id: 0,membershipLevel: 1, name: 1 , birthDate: 1, phoneNumber: 1, cardNumber: 1};
+  const myInfo = await collection.find({"customer_id" : `${user}`}).project(projection).toArray(); 
+  console.table(myInfo)
+  
   while(true){
   console.log('1.수정 2.계정탈퇴 3.뒤로가기 4.종료 5.계정삽입연습');
   let select = await Input.getUserInput();
