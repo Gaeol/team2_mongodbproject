@@ -8,7 +8,6 @@ async function registerUser(client) {
   console.log('아이디을 입력해주세요: ');
   let userid = await Input.getUserInput();
   userid= await Exam.examId(client, "mongoCafe", "Customers", userid)
-  console.log(userid);
   console.log('비밀번호를 입력해주세요: ');
   let pwd = await Input.getUserInput();
   console.log('전화번호를 입력해주세요: ');
