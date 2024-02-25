@@ -20,8 +20,10 @@ async function menuCheck(client){
         let comment = await Input.getUserInput();
         console.log('가격을 입력하세요')
         let price = await Input.getUserInput();
+        console.log('재고을 입력하세요')
+        let stock = await Input.getUserInput();
         await Insert.userInsert(client, "mongoCafe", "Menu", {
-          "_id":parseInt(id), "category":`${category}`, "name":`${name}`, "comment":`${comment}`,"price":parseInt(price)});
+          "_id":parseInt(id), "category":`${category}`, "name":`${name}`, "comment":`${comment}`,"price":parseInt(price),"stockQuantity":parseInt(stock)});
       }else if (select === '2'){
         console.log('메뉴 삭제를 선택하셨습니다.')
         await DeleteMenu.deleteMenu(client, "mongoCafe", "Menu")
