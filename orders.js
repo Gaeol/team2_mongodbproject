@@ -1,7 +1,9 @@
 const {rl} = require('./userInput');  
+const Input = require('./userInput');  
 const Insert= require('./insert.js');
+const UpdateTotal= require('./updatetotal.js');
 
-  async function displayMenu(client,user,a) {
+  async function displayMenu(client,user) {
     try {
       console.log('');
       console.log('mongoCafe에 오신 것을 환영합니다.');
@@ -26,35 +28,32 @@ const Insert= require('./insert.js');
       menuItems.forEach(item => {
         (`ID: ${item._id}, Name: ${item.name}, Price: ${item.price}`);
       });
-
       // 사용자로부터 메뉴 ID 입력 받기
-      rl.question('원하는 메뉴의 ID를 선택해주세요: ', async (menuId) => {
-        // 선택한 메뉴 정보 가져오기
-        const selectedMenu = menuItems.find(menu => menu._id.toString() === menuId);
-
-        // const resultMenu = await client.db("mongoCafe").collection("Menu").find({"name":"아메리카노"}).toArray()
-        // console.log(resultMenu[0]['price']);
+      console.log('원하는 메뉴의 ID를 선택해주세요: ');
+      let menuId =await Input.getUserInput();
+      const selectedMenu = menuItems.find(menu => menu._id.toString() === menuId);
 
         if (selectedMenu) {
           // Display selected menu data
           console.log('선택한 메뉴 정보:');
           console.table([selectedMenu]);
-
-          rl.question('몇 개 주문하시겠습니까?: ', async (orderNum) => {
-            const quantity = parseInt(orderNum, 10);
+          
+          console.log('몇 개 주문하시겠습니까:');
+          let orderNum = await Input.getUserInput();
+          const quantity = parseInt(orderNum, 10);
 
             if (quantity > 0) {
               // 주문 처리 함수 호출
-              placeOrder(selectedMenu, quantity, user,a);
-              addOrder(client, selectedMenu, quantity,user,a);
+              await placeOrder(selectedMenu, quantity, user);
+              await addOrder(client, selectedMenu, quantity,user);
               // payMent(client)
             } else {
               console.log('주문 수량은 1개 이상이어야 합니다.');
               rl.close();
             }
-          });
+          //});
         }
-      });
+      // });
     } catch (error) {
       console.error('에러가 발생했습니다:', error);
     }
@@ -62,9 +61,8 @@ const Insert= require('./insert.js');
 let totalQuantity = 0;
 let orderedItems = [];
 let totalAmount = 0;
-let a=1;
 // 주문 처리 함수
-function placeOrder(selectedMenu, quantity,user,a) {
+async function placeOrder(selectedMenu, quantity, user) {
   console.table([selectedMenu]);
   const totalPrice = selectedMenu.price * quantity;
   console.log('~~~~~~~~~~~~~~~~~~~~~');
@@ -83,12 +81,13 @@ function placeOrder(selectedMenu, quantity,user,a) {
   console.log('~~~~~~~~~~~~~~~~~~~~~');
 }
 
-function payMent(client,user,a){
+async function payMent(client,user){
   console.log(`총 ${totalAmount}원입니다.`);
   console.log('~~~~~~~~~~~~~~~~~~~~~');
-  rl.question(`어떤 걸로 결제 도와드릴까요?
-1.카드 2.포인트 3.취소 4.뒤로가기
-> `, async (payMent) => {
+  console.log('어떤 걸로 결제 도와드릴까요? 1.카드 2.포인트 3.취소 4.뒤로가기')
+  let payMent = await Input.getUserInput();
+
+
       if (payMent === '1') {
         // Call a function or implement payment logic here
         console.log('');
@@ -98,19 +97,17 @@ function payMent(client,user,a){
         console.log('~~~~~~~~~~~~~~~~~~~~~');
         const orderId = await client.db("mongoCafe").collection("Orders").find({}).sort({_id :-1}).toArray();
         let newOrderId=orderId[0]['_id']+1;
-        
-        if(a===1){
+        if(orderedItems.length===1){
           await Insert.userInsert(client, "mongoCafe", "Orders", {
             "_id":parseInt(newOrderId), 
             "items":[
-            { "name": `${orderedItems[0]['name']}`, "quantity": parseInt(orderedItems[0]['quantity'])  },
-            { "name": `${orderedItems[1]['name']}`, "quantity": parseInt(orderedItems[1]['quantity'])  }
+            { "name": `${orderedItems[0]['name']}`, "quantity": parseInt(orderedItems[0]['quantity'])  }
             ],"count":parseInt(totalQuantity), 
             "total":parseInt(totalAmount),
             "lastOrderDate": new Date(),
             "customer_id": `${user}` 
           });
-        }else if(a===2){
+        }else if(orderedItems.length===2){
         await Insert.userInsert(client, "mongoCafe", "Orders", {
           "_id":parseInt(newOrderId), 
           "items":[
@@ -121,7 +118,7 @@ function payMent(client,user,a){
           "lastOrderDate": new Date(),
           "customer_id": `${user}` 
         });
-        }else if(a===3){
+        }else if(orderedItems.length===3){
           await Insert.userInsert(client, "mongoCafe", "Orders", {
             "_id":parseInt(newOrderId), 
             "items":[
@@ -133,7 +130,7 @@ function payMent(client,user,a){
             "lastOrderDate": new Date(),
             "customer_id": `${user}` 
           });
-        }else if(a===4){
+        }else if(orderedItems.length===4){
           await Insert.userInsert(client, "mongoCafe", "Orders", {
             "_id":parseInt(newOrderId), 
             "items":[
@@ -146,7 +143,7 @@ function payMent(client,user,a){
             "lastOrderDate": new Date(),
             "customer_id": `${user}` 
           });
-        }else if(a===5){
+        }else if(orderedItems.length===5){
           await Insert.userInsert(client, "mongoCafe", "Orders", {
             "_id":parseInt(newOrderId), 
             "items":[
@@ -161,7 +158,18 @@ function payMent(client,user,a){
             "customer_id": `${user}` 
           });
         }
-    
+        let myquery= 0;
+        let newStockQuantity=0;
+        let updateStock =0;
+        let orderMenu=0;
+        for( let i =0 ; i< orderedItems.length ; i++){
+          //or=orderedItems[i].name;
+          orderMenu = await client.db("mongoCafe").collection("Menu").findOne({ "name": `${ orderedItems[i]['name'] }` });
+          myquery = { "name": `${orderedItems[i]['name']}` };
+          newStockQuantity = orderMenu.stockQuantity - orderedItems[0]['quantity'];
+          updateStock = await client.db("mongoCafe").collection("Menu").updateOne( myquery, { $set: { "stockQuantity":  parseInt(newStockQuantity) } });
+        }
+        await UpdateTotal.updateTotal(client)
         process.exit(); 
       } else if (payMent === '2') {
         console.log('');
@@ -178,39 +186,34 @@ function payMent(client,user,a){
         console.log('~~~~~~~~~~~~~~~~~~~~~');
         process.exit(); 
       } else if(payMent === '4'){
-        displayMenu(client,user,a);
+        await displayMenu(client,user);
       } else {
         console.log('잘못된 입력입니다. 다시 시도해주세요.');
-        displayMenu(client,user,a);
+        await displayMenu(client,user);
       }
-    });
+//    });
   };
-function addOrder(client, selectedMenu, prevQuantity, user,a) {
-  rl.question(`추가 주문하시겠습니까? 
-  1.예 2.아니요 
->  `, async (addOrderChoice) => {
-    if (addOrderChoice === '1') {
-      a=a+1;
-      console.log(a);
-      displayMenu(client,user,a);
-    } else if (addOrderChoice === '2') {
-      rl.question(`더 이상 주문하지 않겠습니까? 
-  1.예 2.아니요 
-> `, (exitChoice) => {
-        if (exitChoice === '1') {
-          payMent(client,user, a);
-        } else if (exitChoice === '2') {
-          // Continue taking orders
-          displayMenu(client,user,a);
-        } else {
-          console.log('잘못된 입력입니다. 다시 시도해주세요.');
-          addOrder(client,selectedMenu, prevQuantity,user,a);
-        }
-      });
+async function addOrder(client, selectedMenu, prevQuantity, user) {
+  console.log('추가 주문하시겠습니까? 1.예 2.아니오');
+  let addOrderChoice= await Input.getUserInput();
+  if (addOrderChoice === '1') {
+    await displayMenu(client,user);
+  } else if (addOrderChoice === '2'){
+    console.log('더 이상 주문하지 않겠습니까? 1.예 2.아니오')
+    let exitChoice = await Input.getUserInput();
+    if (exitChoice === '1') {
+      await payMent(client,user);
+    } else if (exitChoice === '2') {
+      // Continue taking orders
+      await displayMenu(client,user);
     } else {
       console.log('잘못된 입력입니다. 다시 시도해주세요.');
-      addOrder(client,selectedMenu, prevQuantity,user, a); // ask again
+      await addOrder(client,selectedMenu, prevQuantity,user);
     }
-  });
+  // });
+} else {
+  console.log('잘못된 입력입니다. 다시 시도해주세요.');
+  await addOrder(client,selectedMenu, prevQuantity,user); // ask again
 }
+  }
 module.exports = {displayMenu};
