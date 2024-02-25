@@ -1,9 +1,9 @@
 const {MongoClient}= require('mongodb');
 const Input = require('./userInput');
-const Employees= require('./employees/employees.js')
-const Customers= require('./customers/customers.js')
-const Menu= require('./menu/menu.js')
-const Updatetotal= require('./updatetotal.js')
+const Employees= require('./employees/employees.js');
+const Customers= require('./customers/customers.js');
+const Menu= require('./menu/menu.js');
+const Updatetotal= require('./updatetotal.js');
 
 
 const EventEmitter = require('events');
@@ -22,6 +22,16 @@ async function main(){
   //const db= client.db(dbName);
   //const collection = db.collection('documents');
   
+  console.log(`
+  
+███╗   ███╗ ██████╗ ███╗   ██╗ ██████╗  ██████╗      ██████╗ █████╗ ███████╗███████╗
+████╗ ████║██╔═══██╗████╗  ██║██╔════╝ ██╔═══██╗    ██╔════╝██╔══██╗██╔════╝██╔════╝
+██╔████╔██║██║   ██║██╔██╗ ██║██║  ███╗██║   ██║    ██║     ███████║█████╗  █████╗  
+██║╚██╔╝██║██║   ██║██║╚██╗██║██║   ██║██║   ██║    ██║     ██╔══██║██╔══╝  ██╔══╝  
+██║ ╚═╝ ██║╚██████╔╝██║ ╚████║╚██████╔╝╚██████╔╝    ╚██████╗██║  ██║██║     ███████╗
+╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝  ╚═════╝      ╚═════╝╚═╝  ╚═╝╚═╝     ╚══════╝
+                                                                                    
+`)
   console.log('mongoCafe~에 오신 것을 환영합니다!')
   while(true){
     const result2 = await client.db("mongoCafe").collection("Orders").aggregate([

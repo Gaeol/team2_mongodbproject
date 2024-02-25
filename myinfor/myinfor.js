@@ -4,7 +4,7 @@ const Insert = require('../insert');
 const DeleteAccount = require('../delete')
 const Updatedocuments = require('../update')
 
-async function myinfor(client,user){
+async function myinfor(client, user){
   //userinfo 가져오기
   console.log('My Profile');
   const database = client.db('mongoCafe'); // 데이터베이스 이름
@@ -26,7 +26,7 @@ async function myinfor(client,user){
     console.log('1.예 2.아니오')
     let select_2 = await Input.getUserInput();
     if(select_2 === '1'){
-      await DeleteAccount.deleteAccount(client, "mongoCafe", "Customers",user)
+      await DeleteAccount.deleteAccount(client, "mongoCafe", "Customers" ,user)
     }else{
       console.log('취소되었습니다')
     }

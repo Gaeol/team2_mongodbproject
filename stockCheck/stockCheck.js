@@ -18,15 +18,18 @@ async function stockCheck(client, mongoCafe, Menu){
   }
 }
 
+/* 전체 메뉴 */
 async function view(client, mongoCafe, Menu){
   const projection = { _id:0, name:1, stockQuantity:1};
   const result = await client.db(mongoCafe).collection(Menu).find({}).project(projection).toArray();
   console.table(result);
 }
 
+
+/* 특정 메뉴 */
 async function edit(client, mongoCafe, Menu) {
   try {
-    console.log('수정할 메뉴의 이름을 입력하세요:');
+    console.log('수정할 메뉴를 입력하세요:');
     const menuName = await Input.getUserInput(client, mongoCafe, Menu);
 
     // 현재 재고 확인
