@@ -17,7 +17,7 @@ async function updateTotal(client) {
     myquery,
     { $set: { "totalPayment":  parseInt(newTotalPayment) } }
   );
-  console.log(result)
+  //console.log(result)
 
 }
 module.exports = {updateTotal};

@@ -11,7 +11,8 @@ async function myinfor(client, user){
   const collection = database.collection('Customers'); // 컬렉션 이름
   // const myInfo = await collection.find({"customer_id" : `${user}`}).toArray();
   
-  const projection = { _id: 0,membershipLevel: 1, name: 1 , birthDate: 1, phoneNumber: 1, cardNumber: 1};
+  const projection = { _id: 0,membershipLevel: 1, name: 1 , birthDate: 1, phoneNumber: 1, cardNumber: 1, 
+    customer_id :1 ,totalPayment:1};
   const myInfo = await collection.find({"customer_id" : `${user}`}).project(projection).toArray(); 
   console.table(myInfo)
   

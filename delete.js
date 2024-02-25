@@ -1,9 +1,7 @@
 const { getUserInput } = require('./userInput');
 
-async function deleteAccount(client, mongoCafe, Customers, user){
-  // console.log("삭제할 회원의 이름을 입력하세요")
-  // const delName = await getUserInput()
-  let myqry = { "name": `${user}` };
+async function deleteAccount(client, mongoCafe, Customers,user){
+  let myqry = { "customer_id": `${user}` };
   const result = await client.db(mongoCafe).collection(Customers).deleteOne(myqry);
   console.log("계정이 삭제되었습니다");
 };
@@ -16,9 +14,4 @@ async function deleteMenu(client, mongoCafe, Menu){
   console.log("메뉴가 삭제되었습니다");
 };
 
-module.exports = {deleteAccount, deleteMenu};
-
-// await deleteAccount(client, "mongoCafe", "Customers");
-// await deleteMenu(client, "mongoCafe", "Customers");
-// await DeleteMenu.deleteMenu(client, "mongoCafe", "Customers")
-// const DeleteMenu = require('../delete')
+module.exports = {deleteAccount,deleteMenu};

@@ -4,8 +4,9 @@ const Exam =require('../exam');
 
 async function login(client){    
   console.log('로그인페이지입니다.');
-  console.log('1.아이디입력 2.뒤로가기 3.종료');
+  //console.log('1.아이디입력 2.뒤로가기 3.종료');
   while(true){
+    console.log('1.아이디입력 2.뒤로가기 3.종료');
     let select = await Input.getUserInput();
     if (select === '1') {
       console.log('아이디를 입력해주세요');

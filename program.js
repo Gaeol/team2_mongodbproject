@@ -24,7 +24,15 @@ async function main(){
   
   console.log('mongoCafe~에 오신 것을 환영합니다!')
   while(true){
-  console.log('1.관리자 2.고객 3. 메뉴 4. 종료');
+    const result2 = await client.db("mongoCafe").collection("Orders").aggregate([
+      {
+        $project: { 
+          itemsCount: { $cond : {if: {$isArray: "$items"}, then:{$size:"$items"},else:"NA"}}
+        }
+      }
+    ]).sort({_id :-1}).toArray();
+    const result = await client.db("mongoCafe").collection("Orders").find({}).sort({_id :-1}).toArray();
+    console.log('1.관리자 2.고객 3. 메뉴 4. 종료');
   let select = await Input.getUserInput();
     if (select === '1') {
       await Employees.employees(client);

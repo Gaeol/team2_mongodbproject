@@ -5,9 +5,8 @@ const Myinfor= require('../myinfor/myinfor');
 const orders = require('../orders')
 
 async function login_2(client,user){
-  console.log('1.주문하기 2.내정보관리 3.뒤로가기 4종료');
   while(true){
-    try{
+      console.log('1.주문하기 2.내정보관리 3.로그아웃 4.종료');
       let select = await Input.getUserInput();
       if (select === '1') {
         await orders.displayMenu(client,user);
@@ -20,9 +19,6 @@ async function login_2(client,user){
         console.log('mongoCafe~를 이용해주셔서 감사합니다^^')
         process.exit();
       }
-    } catch (error) {
-      console.error('An error occurred:', error);
-    }
-  }
+    } 
 }
 module.exports = {login_2};
