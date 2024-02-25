@@ -30,7 +30,7 @@ async function examId(client, dbname, colname, join_id){
   let customer;
 
   while(ex===1){
-    for(let i=0; i<result[0]['customerNumber']; i++){
+    for(let i=0; i<result.length; i++){
       if(join_id ===result[i]['customer_id'] ){
       ex=1;
       customer=result[i]['customer_id'];
