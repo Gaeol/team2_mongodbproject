@@ -12,9 +12,9 @@ async function registerUser(client) {
   let pwd = await Input.getUserInput();
   console.log('전화번호를 입력해주세요: ');
   let phoneNumber = await Input.getUserInput();
-  console.log('생년월일 6자리를 입력해주세요.(예시: 1999-07-28): ');
+  console.log('생년월일 8자리를 입력해주세요.(예시: 1999-07-28): ');
   let birthDate = await Input.getUserInput();
-  console.log('카드번호 16자리를 입력해주세요: ');
+  console.log('카드번호 16자리를 입력해주세요.(예시: 1234-5678-9012-3456): ');
   let cardNumber = await Input.getUserInput();
 
   const result = await client.db("mongoCafe").collection("Customers").find({}).sort({_id :-1}).toArray();

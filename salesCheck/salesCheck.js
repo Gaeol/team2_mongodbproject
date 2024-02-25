@@ -15,7 +15,7 @@ async function salesCheck(client, dbname, colname){
   let orderTotal = 0;
 
 //주문수 for문 안에 상세주문 for문
-console.log("mogoCafe 매출")
+console.log("mongoCafe 매출\n")
 for(let a=0; a<resultMenu.length; a++){
   for(let i=0; i<result.length; i++){
     for(let j=0; j<result2[i].itemsCount; j++){
@@ -25,7 +25,7 @@ for(let a=0; a<resultMenu.length; a++){
       }
     }
   }
-  console.log(`| 메뉴: ${resultMenu[a].name.padStart(8)} |        판매잔: ${String(orderTotal).padStart(3)}잔 |         매출: ${String(Total).padStart(5)}원  `)
+  console.log(`| 메뉴: ${resultMenu[a].name.padStart(8)} |        수량: ${String(orderTotal).padStart(3)}개 |         매출: ${String(Total).padStart(5)}원  `)
   console.log("------------------------------------------------------------------------");
   Total=0;
   orderTotal = 0;
