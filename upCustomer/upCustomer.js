@@ -1,4 +1,4 @@
-const Input = require('../userInput'); 
+const Input = require('../userInput');
 const Updatedocuments = require('../update')
 const Exam = require('../exam')
 
@@ -10,36 +10,31 @@ async function upCustomer(client,user){
     console.log('변경하고 싶은 아이디를 입력하세요');
     let id= await Input.getUserInput();
     id= await Exam.examId(client, "mongoCafe", "Customers", id)
-    await Updatedocuments.updatedocuments(client, "mongoCafe", "Customers", "customer_id" ,id ,user);
+    await Updatedocuments.updatedocuments(client, "mongoCafe", "Customers", "customer_id", id ,user);
 
   }else if(select === '2'){
     console.log('변경할 이름을 입력하세요')
     let name= await Input.getUserInput();
-    name= await Exam.examId(client, "mongoCafe", "Customers", name)
     await Updatedocuments.updatedocuments(client, "mongoCafe", "Customers", "name", name ,user);
 
   }else if(select === '3'){
     console.log('변경할 생년월일을 입력하세요')
     let birth1= await Input.getUserInput();
-    birth1= await Exam.examId(client, "mongoCafe", "Customers", birth1)
     await Updatedocuments.updatedocuments(client, "mongoCafe", "Customers", "birthDate", birth1 , user);
 
   }else if(select === '4'){
     console.log('새로운 전화번호를 입력하세요:');
     let phone = await Input.getUserInput();
-    phone= await Exam.examId(client, "mongoCafe", "Customers", phone)
     await Updatedocuments.updatedocuments(client, "mongoCafe", "Customers", "phoneNumber", phone ,user);
 
   }else if(select === '5'){
     console.log('새로운 카드 정보를 입력하세요:');
     let card = await Input.getUserInput();
-    card= await Exam.examId(client, "mongoCafe", "Customers", card)
     await Updatedocuments.updatedocuments(client, "mongoCafe", "Customers", "cardNumber", card, user);
-  
+
   }else if(select === '6'){
     console.log('새로운 결제 비밀번호를 입력하세요:');
     let password = await Input.getUserInput();
-    password= await Exam.examId(client, "mongoCafe", "Customers", password)
     await Updatedocuments.updatedocuments(client, "mongoCafe", "Customers", "paymentPassword", password, user);
 
   }else if(select === '7'){
@@ -80,7 +75,7 @@ async function upCustomerManage(client,user){
     console.log('새로운 카드 정보를 입력하세요:');
     let card = await Input.getUserInput();
     await Updatedocuments.updatedocuments(client, "mongoCafe", "Customers", "cardNumber", card, user);
-  
+
   }else if(select === '6'){
     console.log('새로운 결제 비밀번호를 입력하세요:');
     let password = await Input.getUserInput();
